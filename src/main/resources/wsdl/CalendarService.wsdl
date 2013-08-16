@@ -1,0 +1,1241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://services.axis.openmeetings.apache.org" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax251="http://asterisk.sip.beans.persistence.openmeetings.apache.org/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax270="http://beans.calendar.data.openmeetings.apache.org/xsd" xmlns:ax246="http://basic.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax259="http://room.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax245="http://user.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax248="http://domain.beans.persistence.openmeetings.apache.org/xsd" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ax256="http://invitation.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax244="http://calendar.beans.persistence.openmeetings.apache.org/xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ax252="http://ws.apache.org/namespaces/axis2/enum" targetNamespace="http://services.axis.openmeetings.apache.org">
+    <wsdl:documentation>CalendarService</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema xmlns:ax247="http://basic.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax254="http://asterisk.sip.beans.persistence.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://user.beans.persistence.openmeetings.apache.org/xsd">
+            <xs:import namespace="http://basic.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://asterisk.sip.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:complexType name="User">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="activatehash" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="adresses" nillable="true" type="ax245:Address"/>
+                    <xs:element minOccurs="0" name="age" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="availible" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="forceTimeZoneCheck" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="language_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lastlogin" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lasttrans" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="level_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lieferadressen" nillable="true" type="ax245:Userdata"/>
+                    <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="omTimeZone" nillable="true" type="ax246:OmTimeZone"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="organisation_users" nillable="true" type="ax248:Organisation_Users"/>
+                    <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="phoneForSMS" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pictureuri" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rechnungsaddressen" nillable="true" type="ax245:Userdata"/>
+                    <xs:element minOccurs="0" name="regdate" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="resethash" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="salutations_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="sendSMS" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="sessionData" nillable="true" type="ax246:Sessiondata"/>
+                    <xs:element minOccurs="0" name="showContactData" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="showContactDataToContacts" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="sipUser" nillable="true" type="ax251:AsteriskSipUser"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="status" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="userOffers" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userSearchs" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="userlevel" nillable="true" type="ax245:Userlevel"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Address">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="additionalname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="adresses_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fax" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="states" nillable="true" type="ax245:State"/>
+                    <xs:element minOccurs="0" name="street" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="town" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="zip" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="State">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="code" type="xs:int"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="shortName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="state_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Userdata">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="data" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="data_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="data_key" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Userlevel">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="level_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="statuscode" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax258="http://basic.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax257="http://user.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax265="http://room.beans.persistence.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://invitation.beans.persistence.openmeetings.apache.org/xsd">
+            <xs:import namespace="http://user.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://basic.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://room.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:complexType name="Invitations">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="allowEntry" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="appointmentId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="baseUrl" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="canBeUsedOnlyOneTime" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="conferencedomain" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="hash" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invitationWasUsed" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="invitationpass" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invitations_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="invitedBy" nillable="true" type="ax245:User"/>
+                    <xs:element minOccurs="0" name="invitedEMail" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invitedname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="isPasswordProtected" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isValidByTime" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="omTimeZone" nillable="true" type="ax246:OmTimeZone"/>
+                    <xs:element minOccurs="0" name="room" nillable="true" type="ax259:Room"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="validFrom" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="validTo" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax250="http://domain.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax271="http://beans.calendar.data.openmeetings.apache.org/xsd" xmlns:ax262="http://room.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax268="http://calendar.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax253="http://ws.apache.org/namespaces/axis2/enum" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services.axis.openmeetings.apache.org">
+            <xs:import namespace="http://domain.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://ws.apache.org/namespaces/axis2/enum"/>
+            <xs:import namespace="http://room.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://calendar.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://beans.calendar.data.openmeetings.apache.org/xsd"/>
+            <xs:element name="getAppointmentByRange">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                        <xs:element minOccurs="0" name="endtime" nillable="true" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentByRangeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax268:Appointment"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNextAppointment">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNextAppointmentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax268:Appointment"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveAppointment">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="appointmentName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="appointmentLocation" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="appointmentDescription" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="appointmentstart" nillable="true" type="xs:dateTime"/>
+                        <xs:element minOccurs="0" name="appointmentend" nillable="true" type="xs:dateTime"/>
+                        <xs:element name="isDaily" type="xs:boolean"/>
+                        <xs:element name="isWeekly" type="xs:boolean"/>
+                        <xs:element name="isMonthly" type="xs:boolean"/>
+                        <xs:element name="isYearly" type="xs:boolean"/>
+                        <xs:element name="categoryId" type="xs:long"/>
+                        <xs:element name="remind" type="xs:long"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="mmClient" nillable="true" type="xs:string"/>
+                        <xs:element name="roomType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="baseUrl" nillable="true" type="xs:string"/>
+                        <xs:element name="languageId" type="xs:long"/>
+                        <xs:element name="isPasswordProtected" type="xs:boolean"/>
+                        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+                        <xs:element name="roomId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveAppointmentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentByRangeForUserId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="userId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                        <xs:element minOccurs="0" name="endtime" nillable="true" type="xs:date"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentByRangeForUserIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax268:Appointment"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNextAppointmentForUserId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="userId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getNextAppointmentForUserIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax268:Appointment"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="searchAppointmentByName">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="appointmentName" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="searchAppointmentByNameResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax268:Appointment"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateAppointmentTimeOnly">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="appointmentId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="appointmentstart" nillable="true" type="xs:date"/>
+                        <xs:element minOccurs="0" name="appointmentend" nillable="true" type="xs:date"/>
+                        <xs:element minOccurs="0" name="baseurl" nillable="true" type="xs:string"/>
+                        <xs:element name="languageId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateAppointmentTimeOnlyResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateAppointment">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="appointmentId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="appointmentName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="appointmentLocation" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="appointmentDescription" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="appointmentstart" nillable="true" type="xs:dateTime"/>
+                        <xs:element minOccurs="0" name="appointmentend" nillable="true" type="xs:dateTime"/>
+                        <xs:element name="isDaily" type="xs:boolean"/>
+                        <xs:element name="isWeekly" type="xs:boolean"/>
+                        <xs:element name="isMonthly" type="xs:boolean"/>
+                        <xs:element name="isYearly" type="xs:boolean"/>
+                        <xs:element name="categoryId" type="xs:long"/>
+                        <xs:element name="remind" type="xs:long"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="mmClient" nillable="true" type="xs:string"/>
+                        <xs:element name="roomType" type="xs:long"/>
+                        <xs:element minOccurs="0" name="baseurl" nillable="true" type="xs:string"/>
+                        <xs:element name="languageId" type="xs:long"/>
+                        <xs:element name="isPasswordProtected" type="xs:boolean"/>
+                        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="updateAppointmentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteAppointment">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="appointmentId" type="xs:long"/>
+                        <xs:element name="language_id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteAppointmentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentByRoomId">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="room_id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentByRoomIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax268:Appointment"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentCategoryList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentCategoryListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax268:AppointmentCategory"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentReminderTypList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentReminderTypListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax268:AppointmentReminderTyps"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentsByWeekCalendar">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="firstDayInWeek" type="xs:int"/>
+                        <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:date"/>
+                        <xs:element name="requestUserId" type="xs:long"/>
+                        <xs:element name="omTimeZoneId" type="xs:long"/>
+                        <xs:element minOccurs="0" name="javaTimeZoneName" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAppointmentsByWeekCalendarResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax271:Week"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+        <xs:schema xmlns:ax266="http://invitation.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax255="http://user.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax267="http://basic.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax269="http://room.beans.persistence.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://calendar.beans.persistence.openmeetings.apache.org/xsd">
+            <xs:import namespace="http://user.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://invitation.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://basic.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://room.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:complexType name="Appointment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="appointmentCategory" nillable="true" type="ax244:AppointmentCategory"/>
+                    <xs:element minOccurs="0" name="appointmentDescription" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="appointmentEndtime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="appointmentId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="appointmentLocation" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="appointmentName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="appointmentStarttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="icalId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="isConnectedEvent" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isDaily" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isMonthly" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isPasswordProtected" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isReminderEmailSend" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isWeekly" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isYearly" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="language_id" nillable="true" type="xs:long"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="meetingMember" nillable="true" type="ax244:MeetingMember"/>
+                    <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="remind" nillable="true" type="ax244:AppointmentReminderTyps"/>
+                    <xs:element minOccurs="0" name="room" nillable="true" type="ax259:Room"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="userId" nillable="true" type="ax245:User"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AppointmentCategory">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="categoryId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="user" nillable="true" type="ax245:User"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MeetingMember">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="appointment" nillable="true" type="ax244:Appointment"/>
+                    <xs:element minOccurs="0" name="appointmentStatus" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invitation" nillable="true" type="ax266:Invitations"/>
+                    <xs:element minOccurs="0" name="invitor" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isConnectedEvent" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="meetingMemberId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="memberStatus" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="omTimeZone" nillable="true" type="ax246:OmTimeZone"/>
+                    <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="userid" nillable="true" type="ax245:User"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AppointmentReminderTyps">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="typId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="user" nillable="true" type="ax245:User"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws.apache.org/namespaces/axis2/enum">
+            <xs:simpleType name="Type">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="friend"/>
+                    <xs:enumeration value="user"/>
+                    <xs:enumeration value="peer"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://beans.calendar.data.openmeetings.apache.org/xsd">
+            <xs:complexType name="Week">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="days" nillable="true" type="ax270:Day"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Day">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="appointments" nillable="true" type="ax270:AppointmentDTO"/>
+                    <xs:element minOccurs="0" name="tDate" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AppointmentDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="appointmentId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="categoryId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="end" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="isPasswordProtected" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="location" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="meetingMember" nillable="true" type="ax270:MeetingMemberDTO"/>
+                    <xs:element minOccurs="0" name="organizerId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="reminderId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="roomId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="roomTypeId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="start" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="title" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MeetingMemberDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="invitor" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="jNameTimeZone" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="meetingMemberId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="memberStatus" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userid" nillable="true" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://asterisk.sip.beans.persistence.openmeetings.apache.org/xsd">
+            <xs:complexType name="AsteriskSipUser">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="allow" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="callbackextension" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="context" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="defaultuser" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="fullcontact" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="host" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    <xs:element minOccurs="0" name="ipaddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastms" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="md5secret" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nat" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="port" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="regseconds" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="regserver" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="secret" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" nillable="true" type="ax252:Type"/>
+                    <xs:element minOccurs="0" name="useragent" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax249="http://user.beans.persistence.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://domain.beans.persistence.openmeetings.apache.org/xsd">
+            <xs:import namespace="http://user.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:complexType name="Organisation_Users">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isModerator" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="organisation" nillable="true" type="ax248:Organisation"/>
+                    <xs:element minOccurs="0" name="organisation_users_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="user" nillable="true" type="ax249:User"/>
+                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Organisation">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="insertedby" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organisation_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatedby" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax261="http://basic.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax264="http://domain.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax263="http://user.beans.persistence.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://room.beans.persistence.openmeetings.apache.org/xsd">
+            <xs:import namespace="http://basic.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://user.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://domain.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:complexType name="Room">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="allowFontStyles" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="allowRecording" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="allowUserQuestions" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="appointment" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="autoVideoSelect" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="chatModerated" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="chatOpened" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="confno" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="currentusers" nillable="true" type="ax259:Client"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="demoTime" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="externalRoomId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="externalRoomType" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="filesOpened" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="hideActionsMenu" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="hideActivitiesAndActions" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="hideChat" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="hideFilesExplorer" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="hideScreenSharing" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="hideTopBar" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="hideWhiteboard" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isAudioOnly" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isClosed" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isDemoRoom" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isModeratedRoom" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="ispublic" nillable="true" type="xs:boolean"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="moderators" nillable="true" type="ax259:RoomModerator"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="numberOfPartizipants" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="ownerId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="pin" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="redirectURL" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="roomOrganisations" nillable="true" type="ax259:RoomOrganisation"/>
+                    <xs:element minOccurs="0" name="rooms_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="roomtype" nillable="true" type="ax259:RoomType"/>
+                    <xs:element minOccurs="0" name="showMicrophoneStatus" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="sipEnabled" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="waitForRecording" nillable="true" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Client">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="VHeight" type="xs:int"/>
+                    <xs:element minOccurs="0" name="VWidth" type="xs:int"/>
+                    <xs:element minOccurs="0" name="VX" type="xs:int"/>
+                    <xs:element minOccurs="0" name="VY" type="xs:int"/>
+                    <xs:element minOccurs="0" name="allowRecording" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="avsettings" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="broadCastID" type="xs:long"/>
+                    <xs:element minOccurs="0" name="canDraw" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="canGiveAudio" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="canRemote" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="canShare" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="connectedSince" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="flvRecordingId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="flvRecordingMetaDataId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="formatedDate" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" type="xs:long"/>
+                    <xs:element minOccurs="0" name="interviewPodId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="isAVClient" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isBroadcasting" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isMod" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isRecording" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isScreenClient" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isSuperModerator" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="language" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastLogin" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mail" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="micMuted" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="official_code" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="organization_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="picture_uri" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="publicSID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="roomEnter" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="roomRecordingName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="room_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="scope" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="screenPublishStarted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="server" nillable="true" type="ax261:Server"/>
+                    <xs:element minOccurs="0" name="sipTransport" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="startRecording" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="startStreaming" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="streamPublishName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="streamPublishStarted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="streamid" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="swfurl" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="usercolor" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userip" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userport" type="xs:int"/>
+                    <xs:element minOccurs="0" name="userpos" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="zombieCheckFlag" nillable="true" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="RoomModerator">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="isSuperModerator" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="roomId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="roomModeratorsId" type="xs:long"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="user" nillable="true" type="ax263:User"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="RoomOrganisation">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="organisation" nillable="true" type="ax264:Organisation"/>
+                    <xs:element minOccurs="0" name="room" nillable="true" type="ax259:Room"/>
+                    <xs:element minOccurs="0" name="rooms_organisation_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="RoomType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="roomtypes_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax260="http://user.beans.persistence.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://basic.beans.persistence.openmeetings.apache.org/xsd">
+            <xs:import namespace="http://user.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:complexType name="OmTimeZone">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="frontEndLabel" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ical" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="inserted" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="jname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="label" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="omtimezoneId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="orderId" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Sessiondata">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="language_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="organization_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="refresh_time" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="sessionXml" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="session_id" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="starttermin_time" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="storePermanent" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Server">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="active" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="address" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="inserted" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="insertedby" nillable="true" type="ax260:User"/>
+                    <xs:element minOccurs="0" name="lastPing" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pass" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="port" type="xs:int"/>
+                    <xs:element minOccurs="0" name="protocol" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="updated" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="updatedby" nillable="true" type="ax260:User"/>
+                    <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="webapp" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getAppointmentReminderTypListRequest">
+        <wsdl:part name="parameters" element="ns:getAppointmentReminderTypList"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentReminderTypListResponse">
+        <wsdl:part name="parameters" element="ns:getAppointmentReminderTypListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getNextAppointmentForUserIdRequest">
+        <wsdl:part name="parameters" element="ns:getNextAppointmentForUserId"/>
+    </wsdl:message>
+    <wsdl:message name="getNextAppointmentForUserIdResponse">
+        <wsdl:part name="parameters" element="ns:getNextAppointmentForUserIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="deleteAppointmentRequest">
+        <wsdl:part name="parameters" element="ns:deleteAppointment"/>
+    </wsdl:message>
+    <wsdl:message name="deleteAppointmentResponse">
+        <wsdl:part name="parameters" element="ns:deleteAppointmentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentsByWeekCalendarRequest">
+        <wsdl:part name="parameters" element="ns:getAppointmentsByWeekCalendar"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentsByWeekCalendarResponse">
+        <wsdl:part name="parameters" element="ns:getAppointmentsByWeekCalendarResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getNextAppointmentRequest">
+        <wsdl:part name="parameters" element="ns:getNextAppointment"/>
+    </wsdl:message>
+    <wsdl:message name="getNextAppointmentResponse">
+        <wsdl:part name="parameters" element="ns:getNextAppointmentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentByRoomIdRequest">
+        <wsdl:part name="parameters" element="ns:getAppointmentByRoomId"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentByRoomIdResponse">
+        <wsdl:part name="parameters" element="ns:getAppointmentByRoomIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="updateAppointmentRequest">
+        <wsdl:part name="parameters" element="ns:updateAppointment"/>
+    </wsdl:message>
+    <wsdl:message name="updateAppointmentResponse">
+        <wsdl:part name="parameters" element="ns:updateAppointmentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="saveAppointmentRequest">
+        <wsdl:part name="parameters" element="ns:saveAppointment"/>
+    </wsdl:message>
+    <wsdl:message name="saveAppointmentResponse">
+        <wsdl:part name="parameters" element="ns:saveAppointmentResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentByRangeForUserIdRequest">
+        <wsdl:part name="parameters" element="ns:getAppointmentByRangeForUserId"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentByRangeForUserIdResponse">
+        <wsdl:part name="parameters" element="ns:getAppointmentByRangeForUserIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="updateAppointmentTimeOnlyRequest">
+        <wsdl:part name="parameters" element="ns:updateAppointmentTimeOnly"/>
+    </wsdl:message>
+    <wsdl:message name="updateAppointmentTimeOnlyResponse">
+        <wsdl:part name="parameters" element="ns:updateAppointmentTimeOnlyResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentCategoryListRequest">
+        <wsdl:part name="parameters" element="ns:getAppointmentCategoryList"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentCategoryListResponse">
+        <wsdl:part name="parameters" element="ns:getAppointmentCategoryListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="searchAppointmentByNameRequest">
+        <wsdl:part name="parameters" element="ns:searchAppointmentByName"/>
+    </wsdl:message>
+    <wsdl:message name="searchAppointmentByNameResponse">
+        <wsdl:part name="parameters" element="ns:searchAppointmentByNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentByRangeRequest">
+        <wsdl:part name="parameters" element="ns:getAppointmentByRange"/>
+    </wsdl:message>
+    <wsdl:message name="getAppointmentByRangeResponse">
+        <wsdl:part name="parameters" element="ns:getAppointmentByRangeResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="CalendarServicePortType">
+        <wsdl:operation name="getAppointmentReminderTypList">
+            <wsdl:input message="ns:getAppointmentReminderTypListRequest" wsaw:Action="urn:getAppointmentReminderTypList"/>
+            <wsdl:output message="ns:getAppointmentReminderTypListResponse" wsaw:Action="urn:getAppointmentReminderTypListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getNextAppointmentForUserId">
+            <wsdl:input message="ns:getNextAppointmentForUserIdRequest" wsaw:Action="urn:getNextAppointmentForUserId"/>
+            <wsdl:output message="ns:getNextAppointmentForUserIdResponse" wsaw:Action="urn:getNextAppointmentForUserIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteAppointment">
+            <wsdl:input message="ns:deleteAppointmentRequest" wsaw:Action="urn:deleteAppointment"/>
+            <wsdl:output message="ns:deleteAppointmentResponse" wsaw:Action="urn:deleteAppointmentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentsByWeekCalendar">
+            <wsdl:input message="ns:getAppointmentsByWeekCalendarRequest" wsaw:Action="urn:getAppointmentsByWeekCalendar"/>
+            <wsdl:output message="ns:getAppointmentsByWeekCalendarResponse" wsaw:Action="urn:getAppointmentsByWeekCalendarResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getNextAppointment">
+            <wsdl:input message="ns:getNextAppointmentRequest" wsaw:Action="urn:getNextAppointment"/>
+            <wsdl:output message="ns:getNextAppointmentResponse" wsaw:Action="urn:getNextAppointmentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRoomId">
+            <wsdl:input message="ns:getAppointmentByRoomIdRequest" wsaw:Action="urn:getAppointmentByRoomId"/>
+            <wsdl:output message="ns:getAppointmentByRoomIdResponse" wsaw:Action="urn:getAppointmentByRoomIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateAppointment">
+            <wsdl:input message="ns:updateAppointmentRequest" wsaw:Action="urn:updateAppointment"/>
+            <wsdl:output message="ns:updateAppointmentResponse" wsaw:Action="urn:updateAppointmentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="saveAppointment">
+            <wsdl:input message="ns:saveAppointmentRequest" wsaw:Action="urn:saveAppointment"/>
+            <wsdl:output message="ns:saveAppointmentResponse" wsaw:Action="urn:saveAppointmentResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRangeForUserId">
+            <wsdl:input message="ns:getAppointmentByRangeForUserIdRequest" wsaw:Action="urn:getAppointmentByRangeForUserId"/>
+            <wsdl:output message="ns:getAppointmentByRangeForUserIdResponse" wsaw:Action="urn:getAppointmentByRangeForUserIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="updateAppointmentTimeOnly">
+            <wsdl:input message="ns:updateAppointmentTimeOnlyRequest" wsaw:Action="urn:updateAppointmentTimeOnly"/>
+            <wsdl:output message="ns:updateAppointmentTimeOnlyResponse" wsaw:Action="urn:updateAppointmentTimeOnlyResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentCategoryList">
+            <wsdl:input message="ns:getAppointmentCategoryListRequest" wsaw:Action="urn:getAppointmentCategoryList"/>
+            <wsdl:output message="ns:getAppointmentCategoryListResponse" wsaw:Action="urn:getAppointmentCategoryListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="searchAppointmentByName">
+            <wsdl:input message="ns:searchAppointmentByNameRequest" wsaw:Action="urn:searchAppointmentByName"/>
+            <wsdl:output message="ns:searchAppointmentByNameResponse" wsaw:Action="urn:searchAppointmentByNameResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRange">
+            <wsdl:input message="ns:getAppointmentByRangeRequest" wsaw:Action="urn:getAppointmentByRange"/>
+            <wsdl:output message="ns:getAppointmentByRangeResponse" wsaw:Action="urn:getAppointmentByRangeResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CalendarServiceSoap11Binding" type="ns:CalendarServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getAppointmentReminderTypList">
+            <soap:operation soapAction="urn:getAppointmentReminderTypList" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNextAppointmentForUserId">
+            <soap:operation soapAction="urn:getNextAppointmentForUserId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteAppointment">
+            <soap:operation soapAction="urn:deleteAppointment" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentsByWeekCalendar">
+            <soap:operation soapAction="urn:getAppointmentsByWeekCalendar" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNextAppointment">
+            <soap:operation soapAction="urn:getNextAppointment" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRoomId">
+            <soap:operation soapAction="urn:getAppointmentByRoomId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateAppointment">
+            <soap:operation soapAction="urn:updateAppointment" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="saveAppointment">
+            <soap:operation soapAction="urn:saveAppointment" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRangeForUserId">
+            <soap:operation soapAction="urn:getAppointmentByRangeForUserId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateAppointmentTimeOnly">
+            <soap:operation soapAction="urn:updateAppointmentTimeOnly" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentCategoryList">
+            <soap:operation soapAction="urn:getAppointmentCategoryList" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="searchAppointmentByName">
+            <soap:operation soapAction="urn:searchAppointmentByName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRange">
+            <soap:operation soapAction="urn:getAppointmentByRange" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="CalendarServiceSoap12Binding" type="ns:CalendarServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getAppointmentReminderTypList">
+            <soap12:operation soapAction="urn:getAppointmentReminderTypList" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNextAppointmentForUserId">
+            <soap12:operation soapAction="urn:getNextAppointmentForUserId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteAppointment">
+            <soap12:operation soapAction="urn:deleteAppointment" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentsByWeekCalendar">
+            <soap12:operation soapAction="urn:getAppointmentsByWeekCalendar" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNextAppointment">
+            <soap12:operation soapAction="urn:getNextAppointment" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRoomId">
+            <soap12:operation soapAction="urn:getAppointmentByRoomId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateAppointment">
+            <soap12:operation soapAction="urn:updateAppointment" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="saveAppointment">
+            <soap12:operation soapAction="urn:saveAppointment" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRangeForUserId">
+            <soap12:operation soapAction="urn:getAppointmentByRangeForUserId" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateAppointmentTimeOnly">
+            <soap12:operation soapAction="urn:updateAppointmentTimeOnly" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentCategoryList">
+            <soap12:operation soapAction="urn:getAppointmentCategoryList" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="searchAppointmentByName">
+            <soap12:operation soapAction="urn:searchAppointmentByName" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRange">
+            <soap12:operation soapAction="urn:getAppointmentByRange" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="CalendarServiceHttpBinding" type="ns:CalendarServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getAppointmentReminderTypList">
+            <http:operation location="getAppointmentReminderTypList"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNextAppointmentForUserId">
+            <http:operation location="getNextAppointmentForUserId"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteAppointment">
+            <http:operation location="deleteAppointment"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentsByWeekCalendar">
+            <http:operation location="getAppointmentsByWeekCalendar"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNextAppointment">
+            <http:operation location="getNextAppointment"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRoomId">
+            <http:operation location="getAppointmentByRoomId"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateAppointment">
+            <http:operation location="updateAppointment"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="saveAppointment">
+            <http:operation location="saveAppointment"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRangeForUserId">
+            <http:operation location="getAppointmentByRangeForUserId"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="updateAppointmentTimeOnly">
+            <http:operation location="updateAppointmentTimeOnly"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentCategoryList">
+            <http:operation location="getAppointmentCategoryList"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="searchAppointmentByName">
+            <http:operation location="searchAppointmentByName"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAppointmentByRange">
+            <http:operation location="getAppointmentByRange"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CalendarService">
+        <wsdl:port name="CalendarServiceHttpSoap11Endpoint" binding="ns:CalendarServiceSoap11Binding">
+            <soap:address location="http://localhost:5080/openmeetings/services/CalendarService.CalendarServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="CalendarServiceHttpSoap12Endpoint" binding="ns:CalendarServiceSoap12Binding">
+            <soap12:address location="http://localhost:5080/openmeetings/services/CalendarService.CalendarServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="CalendarServiceHttpEndpoint" binding="ns:CalendarServiceHttpBinding">
+            <http:address location="http://localhost:5080/openmeetings/services/CalendarService.CalendarServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
