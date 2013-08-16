@@ -11,6 +11,10 @@ syntax: glob
 
 # mvn build trees
 target/*
+# code is generated
+src/main/java/*
+# eclipse settings
+.settings/*
 
 # deprecated scripting files
 *.pl
@@ -36,5 +40,10 @@ CVS/*
 
 # Mac idiosyncrasies
 .DS_Store
+
+syntax: regexp
+^\.classpath$
+syntax: regexp
+^\.project$
 
 
