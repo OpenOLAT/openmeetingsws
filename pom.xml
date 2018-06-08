@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openolat</groupId>
 	<artifactId>openmeetingws</artifactId>
-	<version>2.1.1</version>
+	<version>3.0.7</version>
 	<packaging>jar</packaging>
 	<name>openmeeting WS</name>
 	<url>http://www.openolat.org/</url>
@@ -33,6 +33,9 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.wsdl</exclude>
+				</excludes>
 			</resource>
 		</resources>
 
@@ -40,6 +43,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -53,7 +57,7 @@
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
-				<version>2.7.5</version>
+				<version>3.2.4</version>
 				<executions>
 					<execution>
 						<id>generate-sources</id>
@@ -62,16 +66,6 @@
 							<sourceRoot>${basedir}/src/main/java</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>${project.basedir}/src/main/resources/wsdl/CalendarService.wsdl</wsdl>
-									<wsdlLocation>classpath:wsdl/CalendarService.wsdl</wsdlLocation>
-									<bindingFiles>
-										<bindingFile>${project.basedir}/src/main/resources/bindings.xml</bindingFile>
-      								</bindingFiles>
-									<extraargs>
-										<extraarg>-client</extraarg>
-									</extraargs>
-								</wsdlOption>
-								<wsdlOption>
 									<wsdl>${project.basedir}/src/main/resources/wsdl/RoomService.wsdl</wsdl>
 									<wsdlLocation>classpath:wsdl/RoomService.wsdl</wsdlLocation>
 									<bindingFiles>
@@ -79,8 +73,28 @@
       								</bindingFiles>
 									<extraargs>
 										<extraarg>-client</extraarg>
+										<!-- 
+										<extraarg>-p</extraarg>
+										<extraarg>org.apache.openmeetings.v2</extraarg>
+										-->
 									</extraargs>
 								</wsdlOption>
+							
+								<wsdlOption>
+									<wsdl>${project.basedir}/src/main/resources/wsdl/CalendarService.wsdl</wsdl>
+									<wsdlLocation>classpath:wsdl/CalendarService.wsdl</wsdlLocation>
+									<bindingFiles>
+										<bindingFile>${project.basedir}/src/main/resources/bindings.xml</bindingFile>
+      								</bindingFiles>
+									<extraargs>
+										<extraarg>-client</extraarg>
+										<!-- 
+										<extraarg>-p</extraarg>
+										<extraarg>org.apache.openmeetings.v2</extraarg>
+										-->
+									</extraargs>
+								</wsdlOption>
+							
 								<wsdlOption>
 									<wsdl>${project.basedir}/src/main/resources/wsdl/UserService.wsdl</wsdl>
 									<wsdlLocation>classpath:wsdl/UserService.wsdl</wsdlLocation>
@@ -89,6 +103,10 @@
       								</bindingFiles>
 									<extraargs>
 										<extraarg>-client</extraarg>
+										<!-- 
+										<extraarg>-p</extraarg>
+										<extraarg>org.apache.openmeetings.v2</extraarg>
+										-->
 									</extraargs>
 								</wsdlOption>
 								
@@ -109,8 +127,8 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>1.8</source>
+						<target>1.8</target>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -120,24 +138,23 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.sun.xml.ws</groupId>
-			<artifactId>jaxws-rt</artifactId>
-			<version>2.2.6</version>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>3.2.4</version>
+		    <optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.sun.xml.fastinfoset</groupId>
-			<artifactId>FastInfoset</artifactId>
-			<version>1.2.8</version>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-transports-http</artifactId>
+		    <version>3.2.4</version>
+		    <optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>jsr311-api</artifactId>
-			<version>1.1.1</version>
+		    <groupId>org.apache.cxf</groupId>
+		    <artifactId>cxf-rt-transports-http-jetty</artifactId>
+		    <version>3.2.4</version>
+		    <optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>1.4</version>
-		</dependency>
+
 	</dependencies>
 </project>

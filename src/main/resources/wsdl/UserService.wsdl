@@ -1,22 +1,251 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://services.axis.openmeetings.apache.org" xmlns:ax27="http://domain.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax25="http://user.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax23="http://basic.beans.data.openmeetings.apache.org/xsd" xmlns:ax21="http://basic.beans.persistence.openmeetings.apache.org/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:ax210="http://asterisk.sip.beans.persistence.openmeetings.apache.org/xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ax211="http://ws.apache.org/namespaces/axis2/enum" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services.axis.openmeetings.apache.org">
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ax27="http://server.entity.db.openmeetings.apache.org/xsd" xmlns:ax29="http://basic.dto.db.openmeetings.apache.org/xsd" xmlns:ax24="http://ws.apache.org/namespaces/axis2/enum" xmlns:ns="http://services.axis.openmeetings.apache.org" xmlns:ax22="http://user.entity.db.openmeetings.apache.org/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ax21="http://user.dto.db.openmeetings.apache.org/xsd" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" targetNamespace="http://services.axis.openmeetings.apache.org">
     <wsdl:documentation>UserService</wsdl:documentation>
     <wsdl:types>
         <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://ws.apache.org/namespaces/axis2/enum">
             <xs:simpleType name="Type">
                 <xs:restriction base="xs:string">
-                    <xs:enumeration value="friend"/>
                     <xs:enumeration value="user"/>
-                    <xs:enumeration value="peer"/>
+                    <xs:enumeration value="ldap"/>
+                    <xs:enumeration value="oauth"/>
+                    <xs:enumeration value="external"/>
+                    <xs:enumeration value="contact"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:schema>
-        <xs:schema xmlns:ax29="http://domain.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax24="http://basic.beans.data.openmeetings.apache.org/xsd" xmlns:ax22="http://basic.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax214="http://user.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax212="http://ws.apache.org/namespaces/axis2/enum" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services.axis.openmeetings.apache.org">
-            <xs:import namespace="http://basic.beans.persistence.openmeetings.apache.org/xsd"/>
-            <xs:import namespace="http://basic.beans.data.openmeetings.apache.org/xsd"/>
-            <xs:import namespace="http://domain.beans.persistence.openmeetings.apache.org/xsd"/>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://server.entity.db.openmeetings.apache.org/xsd">
+            <xs:complexType name="Sessiondata">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="language_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="organization_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="refresh_time" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="sessionXml" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="session_id" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="starttermin_time" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="storePermanent" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax23="http://user.entity.db.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://user.dto.db.openmeetings.apache.org/xsd">
+            <xs:import namespace="http://user.entity.db.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://user.entity.db.openmeetings.apache.org/xsd"/>
+            <xs:complexType name="UserSearchResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="errorId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="objectName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="records" nillable="true" type="xs:long"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="result" nillable="true" type="ax21:UserDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="UserDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="adresses" nillable="true" type="ax23:Address"/>
+                    <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="language_id" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="rights" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="timeZoneId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" nillable="true" type="ax24:Type"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax210="http://basic.dto.db.openmeetings.apache.org/xsd" xmlns:ax25="http://ws.apache.org/namespaces/axis2/enum" xmlns:ax26="http://user.dto.db.openmeetings.apache.org/xsd" xmlns:ax28="http://server.entity.db.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://services.axis.openmeetings.apache.org">
             <xs:import namespace="http://ws.apache.org/namespaces/axis2/enum"/>
-            <xs:import namespace="http://user.beans.persistence.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://user.dto.db.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://server.entity.db.openmeetings.apache.org/xsd"/>
+            <xs:import namespace="http://basic.dto.db.openmeetings.apache.org/xsd"/>
+            <xs:element name="setUserObjectMainLandingZone">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectMainLandingZoneResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                        <xs:element name="room_id" type="xs:long"/>
+                        <xs:element name="becomeModeratorAsInt" type="xs:int"/>
+                        <xs:element name="showAudioVideoTestAsInt" type="xs:int"/>
+                        <xs:element name="allowRecording" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectAndGenerateRoomHashByURL">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                        <xs:element name="room_id" type="xs:long"/>
+                        <xs:element name="becomeModeratorAsInt" type="xs:int"/>
+                        <xs:element name="showAudioVideoTestAsInt" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectAndGenerateRoomHashByURLResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectAndGenerateRoomHash">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                        <xs:element name="room_id" type="xs:long"/>
+                        <xs:element name="becomeModeratorAsInt" type="xs:int"/>
+                        <xs:element name="showAudioVideoTestAsInt" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectAndGenerateRoomHashResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectAndGenerateRecordingHashByURL">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                        <xs:element name="recording_id" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserObjectAndGenerateRecordingHashByURLResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserAndNickName">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                        <xs:element name="room_id" type="xs:long"/>
+                        <xs:element name="becomeModeratorAsInt" type="xs:int"/>
+                        <xs:element name="showAudioVideoTestAsInt" type="xs:int"/>
+                        <xs:element name="showNickNameDialogAsInt" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setUserAndNickNameResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="loginUser">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="userpass" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="loginUserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="kickUserByPublicSID">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="publicSID" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="kickUserByPublicSIDResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUsersByOrganisation">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="organisation_id" type="xs:long"/>
+                        <xs:element name="start" type="xs:int"/>
+                        <xs:element name="max" type="xs:int"/>
+                        <xs:element minOccurs="0" name="orderby" nillable="true" type="xs:string"/>
+                        <xs:element name="asc" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getUsersByOrganisationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax26:UserSearchResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
             <xs:element name="getSession">
                 <xs:complexType>
                     <xs:sequence/>
@@ -25,7 +254,7 @@
             <xs:element name="getSessionResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="ax21:Sessiondata"/>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax28:Sessiondata"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -41,7 +270,70 @@
             <xs:element name="getErrorByCodeResponse">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="ax23:ErrorResult"/>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax29:ErrorResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserById">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="userId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserByIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserByExternalUserIdAndType">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="deleteUserByExternalUserIdAndTypeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUserToOrganisation">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element name="user_id" type="xs:long"/>
+                        <xs:element name="organisation_id" type="xs:long"/>
+                        <xs:element name="insertedby" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addUserToOrganisationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addOrganisation">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addOrganisationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="return" type="xs:long"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -61,7 +353,6 @@
                         <xs:element name="states_id" type="xs:long"/>
                         <xs:element minOccurs="0" name="town" nillable="true" type="xs:string"/>
                         <xs:element name="language_id" type="xs:long"/>
-                        <xs:element minOccurs="0" name="baseURL" nillable="true" type="xs:string"/>
                         <xs:element minOccurs="0" name="jNameTimeZone" nillable="true" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
@@ -102,282 +393,6 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="deleteUserById">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element name="userId" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="deleteUserByIdResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="deleteUserByExternalUserIdAndType">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="deleteUserByExternalUserIdAndTypeResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObject">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectWithExternalUser">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectWithExternalUserResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectAndGenerateRoomHash">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                        <xs:element name="room_id" type="xs:long"/>
-                        <xs:element name="becomeModeratorAsInt" type="xs:int"/>
-                        <xs:element name="showAudioVideoTestAsInt" type="xs:int"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectAndGenerateRoomHashResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectAndGenerateRoomHashByURL">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                        <xs:element name="room_id" type="xs:long"/>
-                        <xs:element name="becomeModeratorAsInt" type="xs:int"/>
-                        <xs:element name="showAudioVideoTestAsInt" type="xs:int"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectAndGenerateRoomHashByURLResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                        <xs:element name="room_id" type="xs:long"/>
-                        <xs:element name="becomeModeratorAsInt" type="xs:int"/>
-                        <xs:element name="showAudioVideoTestAsInt" type="xs:int"/>
-                        <xs:element name="allowRecording" type="xs:int"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectMainLandingZone">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectMainLandingZoneResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserAndNickName">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="profilePictureUrl" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="email" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                        <xs:element name="room_id" type="xs:long"/>
-                        <xs:element name="becomeModeratorAsInt" type="xs:int"/>
-                        <xs:element name="showAudioVideoTestAsInt" type="xs:int"/>
-                        <xs:element name="showNickNameDialogAsInt" type="xs:int"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserAndNickNameResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectAndGenerateRecordingHashByURL">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                        <xs:element name="recording_id" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="setUserObjectAndGenerateRecordingHashByURLResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="addUserToOrganisation">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element name="user_id" type="xs:long"/>
-                        <xs:element name="organisation_id" type="xs:long"/>
-                        <xs:element name="insertedby" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="addUserToOrganisationResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getUsersByOrganisation">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element name="organisation_id" type="xs:long"/>
-                        <xs:element name="start" type="xs:int"/>
-                        <xs:element name="max" type="xs:int"/>
-                        <xs:element minOccurs="0" name="orderby" nillable="true" type="xs:string"/>
-                        <xs:element name="asc" type="xs:boolean"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getUsersByOrganisationResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" name="return" nillable="true" type="ax25:User"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="kickUserByPublicSID">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="publicSID" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="kickUserByPublicSIDResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" type="xs:boolean"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="addOrganisation">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="addOrganisationResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
             <xs:element name="addNewUser">
                 <xs:complexType>
                     <xs:sequence>
@@ -394,7 +409,6 @@
                         <xs:element name="states_id" type="xs:long"/>
                         <xs:element minOccurs="0" name="town" nillable="true" type="xs:string"/>
                         <xs:element name="language_id" type="xs:long"/>
-                        <xs:element minOccurs="0" name="baseURL" nillable="true" type="xs:string"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -405,152 +419,8 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-            <xs:element name="loginUser">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" name="SID" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string"/>
-                        <xs:element minOccurs="0" name="userpass" nillable="true" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="loginUserResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="return" type="xs:long"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
         </xs:schema>
-        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://basic.beans.data.openmeetings.apache.org/xsd">
-            <xs:complexType name="ErrorResult">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="errmessage" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="errorId" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="errortype" nillable="true" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-        </xs:schema>
-        <xs:schema xmlns:ax28="http://user.beans.persistence.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://domain.beans.persistence.openmeetings.apache.org/xsd">
-            <xs:import namespace="http://user.beans.persistence.openmeetings.apache.org/xsd"/>
-            <xs:complexType name="Organisation_Users">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="isModerator" nillable="true" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="organisation" nillable="true" type="ax27:Organisation"/>
-                    <xs:element minOccurs="0" name="organisation_users_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="user" nillable="true" type="ax28:User"/>
-                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="Organisation">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="insertedby" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="organisation_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="updatedby" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
-                </xs:sequence>
-            </xs:complexType>
-        </xs:schema>
-        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://asterisk.sip.beans.persistence.openmeetings.apache.org/xsd">
-            <xs:complexType name="AsteriskSipUser">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="allow" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="callbackextension" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="context" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="defaultuser" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="fullcontact" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="host" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="id" type="xs:long"/>
-                    <xs:element minOccurs="0" name="ipaddr" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="lastms" nillable="true" type="xs:int"/>
-                    <xs:element minOccurs="0" name="md5secret" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="nat" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="port" nillable="true" type="xs:int"/>
-                    <xs:element minOccurs="0" name="regseconds" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="regserver" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="secret" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="type" nillable="true" type="ax211:Type"/>
-                    <xs:element minOccurs="0" name="useragent" nillable="true" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-        </xs:schema>
-        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://basic.beans.persistence.openmeetings.apache.org/xsd">
-            <xs:complexType name="Sessiondata">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="language_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="organization_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="refresh_time" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="sessionXml" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="session_id" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="starttermin_time" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="storePermanent" nillable="true" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="OmTimeZone">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="frontEndLabel" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="ical" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="inserted" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="jname" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="label" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="omtimezoneId" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="orderId" nillable="true" type="xs:int"/>
-                </xs:sequence>
-            </xs:complexType>
-        </xs:schema>
-        <xs:schema xmlns:ax213="http://asterisk.sip.beans.persistence.openmeetings.apache.org/xsd" xmlns:ax26="http://basic.beans.persistence.openmeetings.apache.org/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://user.beans.persistence.openmeetings.apache.org/xsd">
-            <xs:import namespace="http://basic.beans.persistence.openmeetings.apache.org/xsd"/>
-            <xs:import namespace="http://asterisk.sip.beans.persistence.openmeetings.apache.org/xsd"/>
-            <xs:complexType name="User">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="activatehash" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="adresses" nillable="true" type="ax25:Address"/>
-                    <xs:element minOccurs="0" name="age" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="availible" nillable="true" type="xs:int"/>
-                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="externalUserId" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="externalUserType" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="firstname" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="forceTimeZoneCheck" nillable="true" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="language_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="lastlogin" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="lastname" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="lasttrans" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="level_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="lieferadressen" nillable="true" type="ax25:Userdata"/>
-                    <xs:element minOccurs="0" name="login" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="omTimeZone" nillable="true" type="ax26:OmTimeZone"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="organisation_users" nillable="true" type="ax27:Organisation_Users"/>
-                    <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="phoneForSMS" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="pictureuri" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="rechnungsaddressen" nillable="true" type="ax25:Userdata"/>
-                    <xs:element minOccurs="0" name="regdate" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="resethash" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="salutations_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="sendSMS" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="sessionData" nillable="true" type="ax26:Sessiondata"/>
-                    <xs:element minOccurs="0" name="showContactData" nillable="true" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="showContactDataToContacts" nillable="true" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="sipUser" nillable="true" type="ax213:AsteriskSipUser"/>
-                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="status" nillable="true" type="xs:int"/>
-                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="userOffers" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="userSearchs" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="userlevel" nillable="true" type="ax25:Userlevel"/>
-                </xs:sequence>
-            </xs:complexType>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://user.entity.db.openmeetings.apache.org/xsd">
             <xs:complexType name="Address">
                 <xs:sequence>
                     <xs:element minOccurs="0" name="additionalname" nillable="true" type="xs:string"/>
@@ -561,7 +431,7 @@
                     <xs:element minOccurs="0" name="fax" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="states" nillable="true" type="ax25:State"/>
+                    <xs:element minOccurs="0" name="states" nillable="true" type="ax22:State"/>
                     <xs:element minOccurs="0" name="street" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="town" nillable="true" type="xs:string"/>
                     <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
@@ -579,120 +449,17 @@
                     <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:complexType name="Userdata">
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://basic.dto.db.openmeetings.apache.org/xsd">
+            <xs:complexType name="ErrorResult">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="comment" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="data" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="data_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="data_key" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="user_id" nillable="true" type="xs:long"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="Userlevel">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="deleted" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
-                    <xs:element minOccurs="0" name="level_id" nillable="true" type="xs:long"/>
-                    <xs:element minOccurs="0" name="starttime" nillable="true" type="xs:date"/>
-                    <xs:element minOccurs="0" name="statuscode" nillable="true" type="xs:int"/>
-                    <xs:element minOccurs="0" name="updatetime" nillable="true" type="xs:date"/>
+                    <xs:element minOccurs="0" name="errmessage" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="errorId" nillable="true" type="xs:long"/>
+                    <xs:element minOccurs="0" name="errortype" nillable="true" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
         </xs:schema>
     </wsdl:types>
-    <wsdl:message name="setUserObjectMainLandingZoneRequest">
-        <wsdl:part name="parameters" element="ns:setUserObjectMainLandingZone"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectMainLandingZoneResponse">
-        <wsdl:part name="parameters" element="ns:setUserObjectMainLandingZoneResponse"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectAndGenerateRoomHashByURLRequest">
-        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashByURL"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectAndGenerateRoomHashByURLResponse">
-        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashByURLResponse"/>
-    </wsdl:message>
-    <wsdl:message name="deleteUserByIdRequest">
-        <wsdl:part name="parameters" element="ns:deleteUserById"/>
-    </wsdl:message>
-    <wsdl:message name="deleteUserByIdResponse">
-        <wsdl:part name="parameters" element="ns:deleteUserByIdResponse"/>
-    </wsdl:message>
-    <wsdl:message name="addOrganisationRequest">
-        <wsdl:part name="parameters" element="ns:addOrganisation"/>
-    </wsdl:message>
-    <wsdl:message name="addOrganisationResponse">
-        <wsdl:part name="parameters" element="ns:addOrganisationResponse"/>
-    </wsdl:message>
-    <wsdl:message name="getUsersByOrganisationRequest">
-        <wsdl:part name="parameters" element="ns:getUsersByOrganisation"/>
-    </wsdl:message>
-    <wsdl:message name="getUsersByOrganisationResponse">
-        <wsdl:part name="parameters" element="ns:getUsersByOrganisationResponse"/>
-    </wsdl:message>
-    <wsdl:message name="addNewUserRequest">
-        <wsdl:part name="parameters" element="ns:addNewUser"/>
-    </wsdl:message>
-    <wsdl:message name="addNewUserResponse">
-        <wsdl:part name="parameters" element="ns:addNewUserResponse"/>
-    </wsdl:message>
-    <wsdl:message name="addNewUserWithTimeZoneRequest">
-        <wsdl:part name="parameters" element="ns:addNewUserWithTimeZone"/>
-    </wsdl:message>
-    <wsdl:message name="addNewUserWithTimeZoneResponse">
-        <wsdl:part name="parameters" element="ns:addNewUserWithTimeZoneResponse"/>
-    </wsdl:message>
-    <wsdl:message name="setUserAndNickNameRequest">
-        <wsdl:part name="parameters" element="ns:setUserAndNickName"/>
-    </wsdl:message>
-    <wsdl:message name="setUserAndNickNameResponse">
-        <wsdl:part name="parameters" element="ns:setUserAndNickNameResponse"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectAndGenerateRoomHashRequest">
-        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHash"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectAndGenerateRoomHashResponse">
-        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashResponse"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectAndGenerateRecordingHashByURLRequest">
-        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRecordingHashByURL"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectAndGenerateRecordingHashByURLResponse">
-        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRecordingHashByURLResponse"/>
-    </wsdl:message>
-    <wsdl:message name="deleteUserByExternalUserIdAndTypeRequest">
-        <wsdl:part name="parameters" element="ns:deleteUserByExternalUserIdAndType"/>
-    </wsdl:message>
-    <wsdl:message name="deleteUserByExternalUserIdAndTypeResponse">
-        <wsdl:part name="parameters" element="ns:deleteUserByExternalUserIdAndTypeResponse"/>
-    </wsdl:message>
-    <wsdl:message name="getSessionRequest">
-        <wsdl:part name="parameters" element="ns:getSession"/>
-    </wsdl:message>
-    <wsdl:message name="getSessionResponse">
-        <wsdl:part name="parameters" element="ns:getSessionResponse"/>
-    </wsdl:message>
-    <wsdl:message name="loginUserRequest">
-        <wsdl:part name="parameters" element="ns:loginUser"/>
-    </wsdl:message>
-    <wsdl:message name="loginUserResponse">
-        <wsdl:part name="parameters" element="ns:loginUserResponse"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectRequest">
-        <wsdl:part name="parameters" element="ns:setUserObject"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectResponse">
-        <wsdl:part name="parameters" element="ns:setUserObjectResponse"/>
-    </wsdl:message>
-    <wsdl:message name="addUserToOrganisationRequest">
-        <wsdl:part name="parameters" element="ns:addUserToOrganisation"/>
-    </wsdl:message>
-    <wsdl:message name="addUserToOrganisationResponse">
-        <wsdl:part name="parameters" element="ns:addUserToOrganisationResponse"/>
-    </wsdl:message>
     <wsdl:message name="getErrorByCodeRequest">
         <wsdl:part name="parameters" element="ns:getErrorByCode"/>
     </wsdl:message>
@@ -705,17 +472,11 @@
     <wsdl:message name="kickUserByPublicSIDResponse">
         <wsdl:part name="parameters" element="ns:kickUserByPublicSIDResponse"/>
     </wsdl:message>
-    <wsdl:message name="setUserObjectAndGenerateRoomHashByURLAndRecFlagRequest">
-        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashByURLAndRecFlag"/>
+    <wsdl:message name="addOrganisationRequest">
+        <wsdl:part name="parameters" element="ns:addOrganisation"/>
     </wsdl:message>
-    <wsdl:message name="setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse">
-        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectWithExternalUserRequest">
-        <wsdl:part name="parameters" element="ns:setUserObjectWithExternalUser"/>
-    </wsdl:message>
-    <wsdl:message name="setUserObjectWithExternalUserResponse">
-        <wsdl:part name="parameters" element="ns:setUserObjectWithExternalUserResponse"/>
+    <wsdl:message name="addOrganisationResponse">
+        <wsdl:part name="parameters" element="ns:addOrganisationResponse"/>
     </wsdl:message>
     <wsdl:message name="addNewUserWithExternalTypeRequest">
         <wsdl:part name="parameters" element="ns:addNewUserWithExternalType"/>
@@ -723,67 +484,91 @@
     <wsdl:message name="addNewUserWithExternalTypeResponse">
         <wsdl:part name="parameters" element="ns:addNewUserWithExternalTypeResponse"/>
     </wsdl:message>
+    <wsdl:message name="setUserObjectAndGenerateRecordingHashByURLRequest">
+        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRecordingHashByURL"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectAndGenerateRecordingHashByURLResponse">
+        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRecordingHashByURLResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addUserToOrganisationRequest">
+        <wsdl:part name="parameters" element="ns:addUserToOrganisation"/>
+    </wsdl:message>
+    <wsdl:message name="addUserToOrganisationResponse">
+        <wsdl:part name="parameters" element="ns:addUserToOrganisationResponse"/>
+    </wsdl:message>
+    <wsdl:message name="loginUserRequest">
+        <wsdl:part name="parameters" element="ns:loginUser"/>
+    </wsdl:message>
+    <wsdl:message name="loginUserResponse">
+        <wsdl:part name="parameters" element="ns:loginUserResponse"/>
+    </wsdl:message>
+    <wsdl:message name="deleteUserByExternalUserIdAndTypeRequest">
+        <wsdl:part name="parameters" element="ns:deleteUserByExternalUserIdAndType"/>
+    </wsdl:message>
+    <wsdl:message name="deleteUserByExternalUserIdAndTypeResponse">
+        <wsdl:part name="parameters" element="ns:deleteUserByExternalUserIdAndTypeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectMainLandingZoneRequest">
+        <wsdl:part name="parameters" element="ns:setUserObjectMainLandingZone"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectMainLandingZoneResponse">
+        <wsdl:part name="parameters" element="ns:setUserObjectMainLandingZoneResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addNewUserRequest">
+        <wsdl:part name="parameters" element="ns:addNewUser"/>
+    </wsdl:message>
+    <wsdl:message name="addNewUserResponse">
+        <wsdl:part name="parameters" element="ns:addNewUserResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setUserAndNickNameRequest">
+        <wsdl:part name="parameters" element="ns:setUserAndNickName"/>
+    </wsdl:message>
+    <wsdl:message name="setUserAndNickNameResponse">
+        <wsdl:part name="parameters" element="ns:setUserAndNickNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectAndGenerateRoomHashByURLAndRecFlagRequest">
+        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashByURLAndRecFlag"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse">
+        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectAndGenerateRoomHashByURLRequest">
+        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashByURL"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectAndGenerateRoomHashByURLResponse">
+        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashByURLResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getUsersByOrganisationRequest">
+        <wsdl:part name="parameters" element="ns:getUsersByOrganisation"/>
+    </wsdl:message>
+    <wsdl:message name="getUsersByOrganisationResponse">
+        <wsdl:part name="parameters" element="ns:getUsersByOrganisationResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectAndGenerateRoomHashRequest">
+        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHash"/>
+    </wsdl:message>
+    <wsdl:message name="setUserObjectAndGenerateRoomHashResponse">
+        <wsdl:part name="parameters" element="ns:setUserObjectAndGenerateRoomHashResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getSessionRequest">
+        <wsdl:part name="parameters" element="ns:getSession"/>
+    </wsdl:message>
+    <wsdl:message name="getSessionResponse">
+        <wsdl:part name="parameters" element="ns:getSessionResponse"/>
+    </wsdl:message>
+    <wsdl:message name="deleteUserByIdRequest">
+        <wsdl:part name="parameters" element="ns:deleteUserById"/>
+    </wsdl:message>
+    <wsdl:message name="deleteUserByIdResponse">
+        <wsdl:part name="parameters" element="ns:deleteUserByIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addNewUserWithTimeZoneRequest">
+        <wsdl:part name="parameters" element="ns:addNewUserWithTimeZone"/>
+    </wsdl:message>
+    <wsdl:message name="addNewUserWithTimeZoneResponse">
+        <wsdl:part name="parameters" element="ns:addNewUserWithTimeZoneResponse"/>
+    </wsdl:message>
     <wsdl:portType name="UserServicePortType">
-        <wsdl:operation name="setUserObjectMainLandingZone">
-            <wsdl:input message="ns:setUserObjectMainLandingZoneRequest" wsaw:Action="urn:setUserObjectMainLandingZone"/>
-            <wsdl:output message="ns:setUserObjectMainLandingZoneResponse" wsaw:Action="urn:setUserObjectMainLandingZoneResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURL">
-            <wsdl:input message="ns:setUserObjectAndGenerateRoomHashByURLRequest" wsaw:Action="urn:setUserObjectAndGenerateRoomHashByURL"/>
-            <wsdl:output message="ns:setUserObjectAndGenerateRoomHashByURLResponse" wsaw:Action="urn:setUserObjectAndGenerateRoomHashByURLResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="deleteUserById">
-            <wsdl:input message="ns:deleteUserByIdRequest" wsaw:Action="urn:deleteUserById"/>
-            <wsdl:output message="ns:deleteUserByIdResponse" wsaw:Action="urn:deleteUserByIdResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="addOrganisation">
-            <wsdl:input message="ns:addOrganisationRequest" wsaw:Action="urn:addOrganisation"/>
-            <wsdl:output message="ns:addOrganisationResponse" wsaw:Action="urn:addOrganisationResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="getUsersByOrganisation">
-            <wsdl:input message="ns:getUsersByOrganisationRequest" wsaw:Action="urn:getUsersByOrganisation"/>
-            <wsdl:output message="ns:getUsersByOrganisationResponse" wsaw:Action="urn:getUsersByOrganisationResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="addNewUser">
-            <wsdl:input message="ns:addNewUserRequest" wsaw:Action="urn:addNewUser"/>
-            <wsdl:output message="ns:addNewUserResponse" wsaw:Action="urn:addNewUserResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="addNewUserWithTimeZone">
-            <wsdl:input message="ns:addNewUserWithTimeZoneRequest" wsaw:Action="urn:addNewUserWithTimeZone"/>
-            <wsdl:output message="ns:addNewUserWithTimeZoneResponse" wsaw:Action="urn:addNewUserWithTimeZoneResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="setUserAndNickName">
-            <wsdl:input message="ns:setUserAndNickNameRequest" wsaw:Action="urn:setUserAndNickName"/>
-            <wsdl:output message="ns:setUserAndNickNameResponse" wsaw:Action="urn:setUserAndNickNameResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHash">
-            <wsdl:input message="ns:setUserObjectAndGenerateRoomHashRequest" wsaw:Action="urn:setUserObjectAndGenerateRoomHash"/>
-            <wsdl:output message="ns:setUserObjectAndGenerateRoomHashResponse" wsaw:Action="urn:setUserObjectAndGenerateRoomHashResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRecordingHashByURL">
-            <wsdl:input message="ns:setUserObjectAndGenerateRecordingHashByURLRequest" wsaw:Action="urn:setUserObjectAndGenerateRecordingHashByURL"/>
-            <wsdl:output message="ns:setUserObjectAndGenerateRecordingHashByURLResponse" wsaw:Action="urn:setUserObjectAndGenerateRecordingHashByURLResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="deleteUserByExternalUserIdAndType">
-            <wsdl:input message="ns:deleteUserByExternalUserIdAndTypeRequest" wsaw:Action="urn:deleteUserByExternalUserIdAndType"/>
-            <wsdl:output message="ns:deleteUserByExternalUserIdAndTypeResponse" wsaw:Action="urn:deleteUserByExternalUserIdAndTypeResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="getSession">
-            <wsdl:input message="ns:getSessionRequest" wsaw:Action="urn:getSession"/>
-            <wsdl:output message="ns:getSessionResponse" wsaw:Action="urn:getSessionResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="loginUser">
-            <wsdl:input message="ns:loginUserRequest" wsaw:Action="urn:loginUser"/>
-            <wsdl:output message="ns:loginUserResponse" wsaw:Action="urn:loginUserResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObject">
-            <wsdl:input message="ns:setUserObjectRequest" wsaw:Action="urn:setUserObject"/>
-            <wsdl:output message="ns:setUserObjectResponse" wsaw:Action="urn:setUserObjectResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="addUserToOrganisation">
-            <wsdl:input message="ns:addUserToOrganisationRequest" wsaw:Action="urn:addUserToOrganisation"/>
-            <wsdl:output message="ns:addUserToOrganisationResponse" wsaw:Action="urn:addUserToOrganisationResponse"/>
-        </wsdl:operation>
         <wsdl:operation name="getErrorByCode">
             <wsdl:input message="ns:getErrorByCodeRequest" wsaw:Action="urn:getErrorByCode"/>
             <wsdl:output message="ns:getErrorByCodeResponse" wsaw:Action="urn:getErrorByCodeResponse"/>
@@ -792,23 +577,75 @@
             <wsdl:input message="ns:kickUserByPublicSIDRequest" wsaw:Action="urn:kickUserByPublicSID"/>
             <wsdl:output message="ns:kickUserByPublicSIDResponse" wsaw:Action="urn:kickUserByPublicSIDResponse"/>
         </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
-            <wsdl:input message="ns:setUserObjectAndGenerateRoomHashByURLAndRecFlagRequest" wsaw:Action="urn:setUserObjectAndGenerateRoomHashByURLAndRecFlag"/>
-            <wsdl:output message="ns:setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse" wsaw:Action="urn:setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse"/>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectWithExternalUser">
-            <wsdl:input message="ns:setUserObjectWithExternalUserRequest" wsaw:Action="urn:setUserObjectWithExternalUser"/>
-            <wsdl:output message="ns:setUserObjectWithExternalUserResponse" wsaw:Action="urn:setUserObjectWithExternalUserResponse"/>
+        <wsdl:operation name="addOrganisation">
+            <wsdl:input message="ns:addOrganisationRequest" wsaw:Action="urn:addOrganisation"/>
+            <wsdl:output message="ns:addOrganisationResponse" wsaw:Action="urn:addOrganisationResponse"/>
         </wsdl:operation>
         <wsdl:operation name="addNewUserWithExternalType">
             <wsdl:input message="ns:addNewUserWithExternalTypeRequest" wsaw:Action="urn:addNewUserWithExternalType"/>
             <wsdl:output message="ns:addNewUserWithExternalTypeResponse" wsaw:Action="urn:addNewUserWithExternalTypeResponse"/>
         </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRecordingHashByURL">
+            <wsdl:input message="ns:setUserObjectAndGenerateRecordingHashByURLRequest" wsaw:Action="urn:setUserObjectAndGenerateRecordingHashByURL"/>
+            <wsdl:output message="ns:setUserObjectAndGenerateRecordingHashByURLResponse" wsaw:Action="urn:setUserObjectAndGenerateRecordingHashByURLResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addUserToOrganisation">
+            <wsdl:input message="ns:addUserToOrganisationRequest" wsaw:Action="urn:addUserToOrganisation"/>
+            <wsdl:output message="ns:addUserToOrganisationResponse" wsaw:Action="urn:addUserToOrganisationResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="loginUser">
+            <wsdl:input message="ns:loginUserRequest" wsaw:Action="urn:loginUser"/>
+            <wsdl:output message="ns:loginUserResponse" wsaw:Action="urn:loginUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUserByExternalUserIdAndType">
+            <wsdl:input message="ns:deleteUserByExternalUserIdAndTypeRequest" wsaw:Action="urn:deleteUserByExternalUserIdAndType"/>
+            <wsdl:output message="ns:deleteUserByExternalUserIdAndTypeResponse" wsaw:Action="urn:deleteUserByExternalUserIdAndTypeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectMainLandingZone">
+            <wsdl:input message="ns:setUserObjectMainLandingZoneRequest" wsaw:Action="urn:setUserObjectMainLandingZone"/>
+            <wsdl:output message="ns:setUserObjectMainLandingZoneResponse" wsaw:Action="urn:setUserObjectMainLandingZoneResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addNewUser">
+            <wsdl:input message="ns:addNewUserRequest" wsaw:Action="urn:addNewUser"/>
+            <wsdl:output message="ns:addNewUserResponse" wsaw:Action="urn:addNewUserResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="setUserAndNickName">
+            <wsdl:input message="ns:setUserAndNickNameRequest" wsaw:Action="urn:setUserAndNickName"/>
+            <wsdl:output message="ns:setUserAndNickNameResponse" wsaw:Action="urn:setUserAndNickNameResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
+            <wsdl:input message="ns:setUserObjectAndGenerateRoomHashByURLAndRecFlagRequest" wsaw:Action="urn:setUserObjectAndGenerateRoomHashByURLAndRecFlag"/>
+            <wsdl:output message="ns:setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse" wsaw:Action="urn:setUserObjectAndGenerateRoomHashByURLAndRecFlagResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURL">
+            <wsdl:input message="ns:setUserObjectAndGenerateRoomHashByURLRequest" wsaw:Action="urn:setUserObjectAndGenerateRoomHashByURL"/>
+            <wsdl:output message="ns:setUserObjectAndGenerateRoomHashByURLResponse" wsaw:Action="urn:setUserObjectAndGenerateRoomHashByURLResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getUsersByOrganisation">
+            <wsdl:input message="ns:getUsersByOrganisationRequest" wsaw:Action="urn:getUsersByOrganisation"/>
+            <wsdl:output message="ns:getUsersByOrganisationResponse" wsaw:Action="urn:getUsersByOrganisationResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHash">
+            <wsdl:input message="ns:setUserObjectAndGenerateRoomHashRequest" wsaw:Action="urn:setUserObjectAndGenerateRoomHash"/>
+            <wsdl:output message="ns:setUserObjectAndGenerateRoomHashResponse" wsaw:Action="urn:setUserObjectAndGenerateRoomHashResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getSession">
+            <wsdl:input message="ns:getSessionRequest" wsaw:Action="urn:getSession"/>
+            <wsdl:output message="ns:getSessionResponse" wsaw:Action="urn:getSessionResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUserById">
+            <wsdl:input message="ns:deleteUserByIdRequest" wsaw:Action="urn:deleteUserById"/>
+            <wsdl:output message="ns:deleteUserByIdResponse" wsaw:Action="urn:deleteUserByIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addNewUserWithTimeZone">
+            <wsdl:input message="ns:addNewUserWithTimeZoneRequest" wsaw:Action="urn:addNewUserWithTimeZone"/>
+            <wsdl:output message="ns:addNewUserWithTimeZoneResponse" wsaw:Action="urn:addNewUserWithTimeZoneResponse"/>
+        </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="UserServiceSoap11Binding" type="ns:UserServicePortType">
         <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-        <wsdl:operation name="setUserObjectMainLandingZone">
-            <soap:operation soapAction="urn:setUserObjectMainLandingZone" style="document"/>
+        <wsdl:operation name="getErrorByCode">
+            <soap:operation soapAction="urn:getErrorByCode" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -816,17 +653,8 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="deleteUserById">
-            <soap:operation soapAction="urn:deleteUserById" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURL">
-            <soap:operation soapAction="urn:setUserObjectAndGenerateRoomHashByURL" style="document"/>
+        <wsdl:operation name="kickUserByPublicSID">
+            <soap:operation soapAction="urn:kickUserByPublicSID" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -843,8 +671,8 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="getUsersByOrganisation">
-            <soap:operation soapAction="urn:getUsersByOrganisation" style="document"/>
+        <wsdl:operation name="addNewUserWithExternalType">
+            <soap:operation soapAction="urn:addNewUserWithExternalType" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -852,8 +680,44 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="addNewUserWithTimeZone">
-            <soap:operation soapAction="urn:addNewUserWithTimeZone" style="document"/>
+        <wsdl:operation name="setUserObjectAndGenerateRecordingHashByURL">
+            <soap:operation soapAction="urn:setUserObjectAndGenerateRecordingHashByURL" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addUserToOrganisation">
+            <soap:operation soapAction="urn:addUserToOrganisation" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="loginUser">
+            <soap:operation soapAction="urn:loginUser" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUserByExternalUserIdAndType">
+            <soap:operation soapAction="urn:deleteUserByExternalUserIdAndType" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectMainLandingZone">
+            <soap:operation soapAction="urn:setUserObjectMainLandingZone" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -879,26 +743,35 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
+            <soap:operation soapAction="urn:setUserObjectAndGenerateRoomHashByURLAndRecFlag" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURL">
+            <soap:operation soapAction="urn:setUserObjectAndGenerateRoomHashByURL" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getUsersByOrganisation">
+            <soap:operation soapAction="urn:getUsersByOrganisation" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="setUserObjectAndGenerateRoomHash">
             <soap:operation soapAction="urn:setUserObjectAndGenerateRoomHash" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRecordingHashByURL">
-            <soap:operation soapAction="urn:setUserObjectAndGenerateRecordingHashByURL" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="deleteUserByExternalUserIdAndType">
-            <soap:operation soapAction="urn:deleteUserByExternalUserIdAndType" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -915,8 +788,8 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="loginUser">
-            <soap:operation soapAction="urn:loginUser" style="document"/>
+        <wsdl:operation name="deleteUserById">
+            <soap:operation soapAction="urn:deleteUserById" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -924,62 +797,8 @@
                 <soap:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="setUserObject">
-            <soap:operation soapAction="urn:setUserObject" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="getErrorByCode">
-            <soap:operation soapAction="urn:getErrorByCode" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="addUserToOrganisation">
-            <soap:operation soapAction="urn:addUserToOrganisation" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="kickUserByPublicSID">
-            <soap:operation soapAction="urn:kickUserByPublicSID" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
-            <soap:operation soapAction="urn:setUserObjectAndGenerateRoomHashByURLAndRecFlag" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectWithExternalUser">
-            <soap:operation soapAction="urn:setUserObjectWithExternalUser" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="addNewUserWithExternalType">
-            <soap:operation soapAction="urn:addNewUserWithExternalType" style="document"/>
+        <wsdl:operation name="addNewUserWithTimeZone">
+            <soap:operation soapAction="urn:addNewUserWithTimeZone" style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -990,8 +809,8 @@
     </wsdl:binding>
     <wsdl:binding name="UserServiceSoap12Binding" type="ns:UserServicePortType">
         <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-        <wsdl:operation name="setUserObjectMainLandingZone">
-            <soap12:operation soapAction="urn:setUserObjectMainLandingZone" style="document"/>
+        <wsdl:operation name="getErrorByCode">
+            <soap12:operation soapAction="urn:getErrorByCode" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -999,17 +818,8 @@
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="deleteUserById">
-            <soap12:operation soapAction="urn:deleteUserById" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURL">
-            <soap12:operation soapAction="urn:setUserObjectAndGenerateRoomHashByURL" style="document"/>
+        <wsdl:operation name="kickUserByPublicSID">
+            <soap12:operation soapAction="urn:kickUserByPublicSID" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -1026,8 +836,8 @@
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="getUsersByOrganisation">
-            <soap12:operation soapAction="urn:getUsersByOrganisation" style="document"/>
+        <wsdl:operation name="addNewUserWithExternalType">
+            <soap12:operation soapAction="urn:addNewUserWithExternalType" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -1035,8 +845,44 @@
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="addNewUserWithTimeZone">
-            <soap12:operation soapAction="urn:addNewUserWithTimeZone" style="document"/>
+        <wsdl:operation name="setUserObjectAndGenerateRecordingHashByURL">
+            <soap12:operation soapAction="urn:setUserObjectAndGenerateRecordingHashByURL" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addUserToOrganisation">
+            <soap12:operation soapAction="urn:addUserToOrganisation" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="loginUser">
+            <soap12:operation soapAction="urn:loginUser" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUserByExternalUserIdAndType">
+            <soap12:operation soapAction="urn:deleteUserByExternalUserIdAndType" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectMainLandingZone">
+            <soap12:operation soapAction="urn:setUserObjectMainLandingZone" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -1062,26 +908,35 @@
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
+            <soap12:operation soapAction="urn:setUserObjectAndGenerateRoomHashByURLAndRecFlag" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURL">
+            <soap12:operation soapAction="urn:setUserObjectAndGenerateRoomHashByURL" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getUsersByOrganisation">
+            <soap12:operation soapAction="urn:getUsersByOrganisation" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="setUserObjectAndGenerateRoomHash">
             <soap12:operation soapAction="urn:setUserObjectAndGenerateRoomHash" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRecordingHashByURL">
-            <soap12:operation soapAction="urn:setUserObjectAndGenerateRecordingHashByURL" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="deleteUserByExternalUserIdAndType">
-            <soap12:operation soapAction="urn:deleteUserByExternalUserIdAndType" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -1098,8 +953,8 @@
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="loginUser">
-            <soap12:operation soapAction="urn:loginUser" style="document"/>
+        <wsdl:operation name="deleteUserById">
+            <soap12:operation soapAction="urn:deleteUserById" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -1107,62 +962,8 @@
                 <soap12:body use="literal"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="setUserObject">
-            <soap12:operation soapAction="urn:setUserObject" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="getErrorByCode">
-            <soap12:operation soapAction="urn:getErrorByCode" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="addUserToOrganisation">
-            <soap12:operation soapAction="urn:addUserToOrganisation" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="kickUserByPublicSID">
-            <soap12:operation soapAction="urn:kickUserByPublicSID" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
-            <soap12:operation soapAction="urn:setUserObjectAndGenerateRoomHashByURLAndRecFlag" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectWithExternalUser">
-            <soap12:operation soapAction="urn:setUserObjectWithExternalUser" style="document"/>
-            <wsdl:input>
-                <soap12:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap12:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="addNewUserWithExternalType">
-            <soap12:operation soapAction="urn:addNewUserWithExternalType" style="document"/>
+        <wsdl:operation name="addNewUserWithTimeZone">
+            <soap12:operation soapAction="urn:addNewUserWithTimeZone" style="document"/>
             <wsdl:input>
                 <soap12:body use="literal"/>
             </wsdl:input>
@@ -1173,8 +974,8 @@
     </wsdl:binding>
     <wsdl:binding name="UserServiceHttpBinding" type="ns:UserServicePortType">
         <http:binding verb="POST"/>
-        <wsdl:operation name="setUserObjectMainLandingZone">
-            <http:operation location="setUserObjectMainLandingZone"/>
+        <wsdl:operation name="getErrorByCode">
+            <http:operation location="getErrorByCode"/>
             <wsdl:input>
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:input>
@@ -1182,17 +983,8 @@
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="deleteUserById">
-            <http:operation location="deleteUserById"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURL">
-            <http:operation location="setUserObjectAndGenerateRoomHashByURL"/>
+        <wsdl:operation name="kickUserByPublicSID">
+            <http:operation location="kickUserByPublicSID"/>
             <wsdl:input>
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:input>
@@ -1209,8 +1001,8 @@
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="getUsersByOrganisation">
-            <http:operation location="getUsersByOrganisation"/>
+        <wsdl:operation name="addNewUserWithExternalType">
+            <http:operation location="addNewUserWithExternalType"/>
             <wsdl:input>
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:input>
@@ -1218,8 +1010,44 @@
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="addNewUserWithTimeZone">
-            <http:operation location="addNewUserWithTimeZone"/>
+        <wsdl:operation name="setUserObjectAndGenerateRecordingHashByURL">
+            <http:operation location="setUserObjectAndGenerateRecordingHashByURL"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addUserToOrganisation">
+            <http:operation location="addUserToOrganisation"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="loginUser">
+            <http:operation location="loginUser"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="deleteUserByExternalUserIdAndType">
+            <http:operation location="deleteUserByExternalUserIdAndType"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectMainLandingZone">
+            <http:operation location="setUserObjectMainLandingZone"/>
             <wsdl:input>
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:input>
@@ -1245,26 +1073,35 @@
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:output>
         </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
+            <http:operation location="setUserObjectAndGenerateRoomHashByURLAndRecFlag"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURL">
+            <http:operation location="setUserObjectAndGenerateRoomHashByURL"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getUsersByOrganisation">
+            <http:operation location="getUsersByOrganisation"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
         <wsdl:operation name="setUserObjectAndGenerateRoomHash">
             <http:operation location="setUserObjectAndGenerateRoomHash"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRecordingHashByURL">
-            <http:operation location="setUserObjectAndGenerateRecordingHashByURL"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="deleteUserByExternalUserIdAndType">
-            <http:operation location="deleteUserByExternalUserIdAndType"/>
             <wsdl:input>
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:input>
@@ -1281,8 +1118,8 @@
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="loginUser">
-            <http:operation location="loginUser"/>
+        <wsdl:operation name="deleteUserById">
+            <http:operation location="deleteUserById"/>
             <wsdl:input>
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:input>
@@ -1290,62 +1127,8 @@
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:output>
         </wsdl:operation>
-        <wsdl:operation name="setUserObject">
-            <http:operation location="setUserObject"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="getErrorByCode">
-            <http:operation location="getErrorByCode"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="addUserToOrganisation">
-            <http:operation location="addUserToOrganisation"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="kickUserByPublicSID">
-            <http:operation location="kickUserByPublicSID"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectAndGenerateRoomHashByURLAndRecFlag">
-            <http:operation location="setUserObjectAndGenerateRoomHashByURLAndRecFlag"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="setUserObjectWithExternalUser">
-            <http:operation location="setUserObjectWithExternalUser"/>
-            <wsdl:input>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:input>
-            <wsdl:output>
-                <mime:content type="application/xml" part="parameters"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="addNewUserWithExternalType">
-            <http:operation location="addNewUserWithExternalType"/>
+        <wsdl:operation name="addNewUserWithTimeZone">
+            <http:operation location="addNewUserWithTimeZone"/>
             <wsdl:input>
                 <mime:content type="application/xml" part="parameters"/>
             </wsdl:input>
@@ -1356,13 +1139,13 @@
     </wsdl:binding>
     <wsdl:service name="UserService">
         <wsdl:port name="UserServiceHttpSoap11Endpoint" binding="ns:UserServiceSoap11Binding">
-            <soap:address location="http://localhost:5080/openmeetings/services/UserService.UserServiceHttpSoap11Endpoint/"/>
+            <soap:address location="http://131.246.123.153:5080/openmeetings/services/UserService.UserServiceHttpSoap11Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="UserServiceHttpSoap12Endpoint" binding="ns:UserServiceSoap12Binding">
-            <soap12:address location="http://localhost:5080/openmeetings/services/UserService.UserServiceHttpSoap12Endpoint/"/>
+            <soap12:address location="http://131.246.123.153:5080/openmeetings/services/UserService.UserServiceHttpSoap12Endpoint/"/>
         </wsdl:port>
         <wsdl:port name="UserServiceHttpEndpoint" binding="ns:UserServiceHttpBinding">
-            <http:address location="http://localhost:5080/openmeetings/services/UserService.UserServiceHttpEndpoint/"/>
+            <http:address location="http://131.246.123.153:5080/openmeetings/services/UserService.UserServiceHttpEndpoint/"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
