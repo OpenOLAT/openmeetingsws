@@ -1,0 +1,25 @@
+/bin/
+/target/
+/cargo/
+/.settings/
+
+# deprecated scripting files
+*.pl
+*.php
+
+# editor backup files
+*~
+*.bak
+*.swp
+
+# sundry useless files
+*.out
+mvn*.log
+
+# Mac idiosyncrasies
+.DS_Store
+
+#ignore project/.classpath file at this gets created by maven
+.classpath
+.project
+/src/main/java/
