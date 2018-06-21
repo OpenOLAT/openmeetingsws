@@ -1,5 +1,6 @@
 # OpenMeetings WS for OpenOLAT
 
+A project to compile in Java the WSDL's of Openmeetings used by the Openmeetings virtual classrom in OpenOLAT.
 
 The project doesn't contains Java classes, they are generated with maven.
 
