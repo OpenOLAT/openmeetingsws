@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openolat</groupId>
 	<artifactId>openmeetingws</artifactId>
-	<version>3.0.8</version>
+	<version>3.0.8.jdk11</version>
 	<packaging>jar</packaging>
 	<name>openmeeting WS</name>
 	<url>http://www.openolat.org/</url>
@@ -21,6 +21,12 @@
 			<url>https://nexus.openolat.org/nexus/content/repositories/openolat-snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<targetJdk>11</targetJdk>
+		<apache.cxf>3.5.3</apache.cxf>
+	</properties>
 
 	<build>
 		<resources>
@@ -57,7 +63,7 @@
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-codegen-plugin</artifactId>
-				<version>3.2.4</version>
+				<version>${apache.cxf}</version>
 				<executions>
 					<execution>
 						<id>generate-sources</id>
@@ -126,9 +132,10 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<source>${targetJdk}</source>
+						<target>${targetJdk}</target>
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
@@ -140,19 +147,19 @@
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
-			<version>3.2.4</version>
+			<version>${apache.cxf}</version>
 		    <optional>true</optional>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.cxf</groupId>
 		    <artifactId>cxf-rt-transports-http</artifactId>
-		    <version>3.2.4</version>
+		    <version>${apache.cxf}</version>
 		    <optional>true</optional>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.cxf</groupId>
 		    <artifactId>cxf-rt-transports-http-jetty</artifactId>
-		    <version>3.2.4</version>
+		    <version>${apache.cxf}</version>
 		    <optional>true</optional>
 		</dependency>
 
