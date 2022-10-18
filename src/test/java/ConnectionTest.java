@@ -1,7 +1,7 @@
 import java.net.URL;
 
 import javax.xml.namespace.QName;
-import javax.xml.ws.BindingProvider;
+import jakarta.xml.ws.BindingProvider;
 
 import org.apache.openmeetings.axis.services.UserService;
 import org.apache.openmeetings.axis.services.UserServicePortType;

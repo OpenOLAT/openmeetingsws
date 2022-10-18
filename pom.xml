@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openolat</groupId>
 	<artifactId>openmeetingws</artifactId>
-	<version>3.0.8.jdk11</version>
+	<version>3.0.8.jdk17</version>
 	<packaging>jar</packaging>
 	<name>openmeeting WS</name>
 	<url>http://www.openolat.org/</url>
@@ -24,8 +24,8 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<targetJdk>11</targetJdk>
-		<apache.cxf>3.5.3</apache.cxf>
+		<targetJdk>17</targetJdk>
+		<apache.cxf>4.0.0-SNAPSHOT</apache.cxf>
 	</properties>
 
 	<build>
