@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.openolat</groupId>
 	<artifactId>openmeetingws</artifactId>
-	<version>3.0.8.jdk17</version>
+	<version>3.0.8.jee9</version>
 	<packaging>jar</packaging>
 	<name>openmeeting WS</name>
 	<url>http://www.openolat.org/</url>
