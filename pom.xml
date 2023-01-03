@@ -25,7 +25,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<targetJdk>11</targetJdk>
-		<apache.cxf>3.5.3</apache.cxf>
+		<apache.cxf>3.5.5</apache.cxf>
 	</properties>
 
 	<build>
